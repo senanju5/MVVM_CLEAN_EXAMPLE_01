@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.mvvm_clean_example_01.R
-import com.example.mvvm_clean_example_01.model.FoodRecipe
-import com.example.mvvm_clean_example_01.model.Result
+import com.example.mvvm_clean_example_01.data.network.model.RemoteFoodRecipe
+import com.example.mvvm_clean_example_01.data.network.model.Result
 
 class RecipeAdapter:RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
     private  var recipes = emptyList<Result>()
@@ -39,7 +39,7 @@ class RecipeAdapter:RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
         return recipes.size
     }
 
-    fun setData (newData:FoodRecipe) {
+    fun setData (newData: RemoteFoodRecipe) {
         recipes = newData.results
         notifyDataSetChanged()
     }

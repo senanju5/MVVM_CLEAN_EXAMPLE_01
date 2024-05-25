@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
         var adapter = RecipeAdapter()
         recyclerView.adapter =adapter
 
-        mainViewModel.foodRecipe.observe(viewLifecycleOwner) { response ->
+        mainViewModel.remoteFoodRecipe.observe(viewLifecycleOwner) { response ->
             Log.d("Senthil", response.toString())
             adapter.setData(response)
         }

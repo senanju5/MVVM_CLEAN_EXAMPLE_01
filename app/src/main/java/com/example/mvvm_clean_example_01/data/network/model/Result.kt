@@ -1,4 +1,4 @@
-package com.example.mvvm_clean_example_01.model
+package com.example.mvvm_clean_example_01.data.network.model
 
 
 import com.google.gson.annotations.SerializedName
