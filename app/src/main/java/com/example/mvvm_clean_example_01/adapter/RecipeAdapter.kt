@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.mvvm_clean_example_01.R
+import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.data.network.model.RemoteFoodRecipe
 import com.example.mvvm_clean_example_01.data.network.model.Result
 
 class RecipeAdapter:RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
-    private  var recipes = emptyList<Result>()
+    private  var recipes = emptyList<FoodRecipe>()
     class RecipeViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
            val titleTextView = itemView.findViewById<TextView>(R.id.titleText)
            val priceTextView = itemView.findViewById<TextView>(R.id.priceText)
@@ -39,8 +40,8 @@ class RecipeAdapter:RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
         return recipes.size
     }
 
-    fun setData (newData: RemoteFoodRecipe) {
-        recipes = newData.results
+    fun setData (newData: List<FoodRecipe>) {
+        recipes = newData
         notifyDataSetChanged()
     }
 }
