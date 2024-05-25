@@ -13,7 +13,7 @@ class FoodRecipeRepository (private val remoteDataSource: RemoteDataSource) {
         var foodRecipes = ArrayList<FoodRecipe>()
         val foodRecipe = remoteDataSource.getFoodRecipes(queries)
         for (food in foodRecipe.results){
-            foodRecipes.add(FoodRecipe(food.image, food.title, food.pricePerServing, food.summary))
+            foodRecipes.add(FoodRecipe(food.image, food.title, food.pricePerServing, food.summary, food.id))
         }
         emit(foodRecipes)
     }.flowOn(Dispatchers.IO)

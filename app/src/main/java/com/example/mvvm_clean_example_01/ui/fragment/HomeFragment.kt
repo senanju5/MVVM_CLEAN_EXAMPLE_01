@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
 
         mainViewModel.remoteFoodRecipe.observe(viewLifecycleOwner) { response ->
             Log.d("Senthil", response.toString())
-            adapter.setData(response)
+            adapter.submitList(response)
         }
 
         return view
