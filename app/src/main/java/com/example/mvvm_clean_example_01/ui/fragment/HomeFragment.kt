@@ -6,15 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm_clean_example_01.R
 import com.example.mvvm_clean_example_01.adapter.RecipeAdapter
+import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.data.remotedata.RemoteDataSource
 import com.example.mvvm_clean_example_01.data.repository.FoodRecipeRepository
 import com.example.mvvm_clean_example_01.domain.RecipeUsecase
 import com.example.mvvm_clean_example_01.ui.viewmodel.MainViewModel
 import com.example.mvvm_clean_example_01.utils.Constants.Companion.API_KEY
+import com.google.gson.Gson
 
 
 /**
@@ -42,11 +46,14 @@ class HomeFragment : Fragment() {
         mainViewModel.getFoodRecipe(applyQueries())
         val recyclerView = view.findViewById<RecyclerView>(R.id.food_recipe_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        var adapter = RecipeAdapter()
+        var adapter = RecipeAdapter {foodRecipe: FoodRecipe ->
+            val recipe = Gson().toJson(foodRecipe)
+            val bundle = bundleOf("recipe" to recipe)
+          findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+        }
         recyclerView.adapter =adapter
 
         mainViewModel.remoteFoodRecipe.observe(viewLifecycleOwner) { response ->
-            Log.d("Senthil", response.toString())
             adapter.submitList(response)
         }
 

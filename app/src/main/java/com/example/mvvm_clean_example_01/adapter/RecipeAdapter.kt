@@ -14,7 +14,7 @@ import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.data.network.model.RemoteFoodRecipe
 import com.example.mvvm_clean_example_01.data.network.model.Result
 
-class RecipeAdapter:ListAdapter<FoodRecipe,RecipeAdapter.RecipeViewHolder>(DIFF_CALLBACK) {
+class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<FoodRecipe,RecipeAdapter.RecipeViewHolder>(DIFF_CALLBACK) {
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FoodRecipe>() {
             override fun areItemsTheSame(oldItem: FoodRecipe, newItem: FoodRecipe): Boolean {
@@ -24,26 +24,33 @@ class RecipeAdapter:ListAdapter<FoodRecipe,RecipeAdapter.RecipeViewHolder>(DIFF_
                 return oldItem == newItem
             }
         }        }
-    class RecipeViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
+    class RecipeViewHolder(itemView: View, private val clickListener:(FoodRecipe)->Unit) :RecyclerView.ViewHolder(itemView) {
            val titleTextView = itemView.findViewById<TextView>(R.id.titleText)
            val priceTextView = itemView.findViewById<TextView>(R.id.priceText)
            val recipeImageView = itemView.findViewById<ImageView>(R.id.imageView)
+
+
+        fun onBindView(foodRecipe: FoodRecipe) {
+           titleTextView.text = foodRecipe.title
+            priceTextView.text = foodRecipe.pricePerServing.toString()
+            recipeImageView.load(foodRecipe.image){
+                crossfade(true)
+                crossfade(600)
+            }
+            itemView.setOnClickListener {
+                clickListener(foodRecipe)
+            }
+        }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecipeAdapter.RecipeViewHolder {
-        return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.food_item_view,parent,false))
+        return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.food_item_view,parent,false), clickListener)
     }
 
     override fun onBindViewHolder(holder: RecipeAdapter.RecipeViewHolder, position: Int) {
-        val recipes = getItem(position)
-        holder.titleTextView.text = recipes.title
-        holder.priceTextView.text = recipes.pricePerServing.toString()
-        holder.recipeImageView.load(recipes.image){
-            crossfade(true)
-            crossfade(600)
-        }
+        holder.onBindView(getItem(position))
     }
 }
