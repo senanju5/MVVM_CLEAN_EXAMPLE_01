@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.mvvm_clean_example_01.R
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
-import com.example.mvvm_clean_example_01.data.network.model.RemoteFoodRecipe
-import com.example.mvvm_clean_example_01.data.network.model.Result
 
 class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<FoodRecipe,RecipeAdapter.RecipeViewHolder>(DIFF_CALLBACK) {
     companion object {
@@ -46,11 +44,11 @@ class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<Fo
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecipeAdapter.RecipeViewHolder {
+    ): RecipeViewHolder {
         return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.food_item_view,parent,false), clickListener)
     }
 
-    override fun onBindViewHolder(holder: RecipeAdapter.RecipeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         holder.onBindView(getItem(position))
     }
 }
