@@ -7,7 +7,7 @@ import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.domain.RecipeUsecase
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val recipeUsecase: RecipeUsecase):ViewModel() {
+class MainViewModel(private val recipeUsecase: RecipeUsecase = RecipeUsecase()):ViewModel() {
 
     public val remoteFoodRecipe = MutableLiveData<List<FoodRecipe>>()
 

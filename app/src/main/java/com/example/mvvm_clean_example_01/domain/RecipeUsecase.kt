@@ -5,7 +5,7 @@ import com.example.mvvm_clean_example_01.data.repository.FoodRecipeRepository
 import com.example.mvvm_clean_example_01.data.network.model.RemoteFoodRecipe
 import kotlinx.coroutines.flow.Flow
 
-class RecipeUsecase(private val recipeRepository: FoodRecipeRepository) {
+class RecipeUsecase(private val recipeRepository: FoodRecipeRepository = FoodRecipeRepository()) {
     suspend operator fun invoke(queries: Map<String, String>): Flow<List<FoodRecipe>> {
         return recipeRepository.getFoodRecipes(queries)
     }

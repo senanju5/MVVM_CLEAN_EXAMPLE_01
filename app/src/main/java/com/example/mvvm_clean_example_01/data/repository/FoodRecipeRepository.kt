@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class FoodRecipeRepository (private val remoteDataSource: RemoteDataSource) {
+class FoodRecipeRepository (private val remoteDataSource: RemoteDataSource = RemoteDataSource()) {
     suspend fun getFoodRecipes(queries: Map<String, String>): Flow<List<FoodRecipe>> = flow {
-        var foodRecipes = ArrayList<FoodRecipe>()
+         var foodRecipes:MutableList<FoodRecipe> = mutableListOf()
         val foodRecipe = remoteDataSource.getFoodRecipes(queries)
         for (food in foodRecipe.results){
             foodRecipes.add(FoodRecipe(food.image, food.title, food.pricePerServing, food.summary, food.id))
