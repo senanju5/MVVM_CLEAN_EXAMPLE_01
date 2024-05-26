@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.mvvm_clean_example_01.R
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
+import com.example.mvvm_clean_example_01.databinding.FoodItemViewBinding
 
 class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<FoodRecipe,RecipeAdapter.RecipeViewHolder>(DIFF_CALLBACK) {
     companion object {
@@ -22,16 +23,12 @@ class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<Fo
                 return oldItem == newItem
             }
         }        }
-    class RecipeViewHolder(itemView: View, private val clickListener:(FoodRecipe)->Unit) :RecyclerView.ViewHolder(itemView) {
-           val titleTextView = itemView.findViewById<TextView>(R.id.titleText)
-           val priceTextView = itemView.findViewById<TextView>(R.id.priceText)
-           val recipeImageView = itemView.findViewById<ImageView>(R.id.imageView)
-
-
+    class RecipeViewHolder(private val binding: FoodItemViewBinding, private val clickListener:(FoodRecipe)->Unit) :RecyclerView.ViewHolder(binding.root) {
         fun onBindView(foodRecipe: FoodRecipe) {
-           titleTextView.text = (foodRecipe.title)
-            priceTextView.text = ("Price: "+foodRecipe.pricePerServing.toString())
-            recipeImageView.load(foodRecipe.image){
+            binding.titleText.text = (foodRecipe.title)
+            binding.priceText.text = ("Price: "+foodRecipe.pricePerServing.toString())
+
+            binding.imageView.load(foodRecipe.image){
                 crossfade(true)
                 crossfade(600)
             }
@@ -45,7 +42,8 @@ class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<Fo
         parent: ViewGroup,
         viewType: Int
     ): RecipeViewHolder {
-        return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.food_item_view,parent,false), clickListener)
+        val binding = FoodItemViewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return RecipeViewHolder(binding, clickListener)
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {

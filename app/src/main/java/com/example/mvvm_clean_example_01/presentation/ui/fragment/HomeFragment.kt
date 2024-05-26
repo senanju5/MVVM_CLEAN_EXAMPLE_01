@@ -15,6 +15,7 @@ import com.example.mvvm_clean_example_01.adapter.RecipeAdapter
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.data.remotedata.RemoteDataSource
 import com.example.mvvm_clean_example_01.data.repository.FoodRecipeRepository
+import com.example.mvvm_clean_example_01.databinding.FragmentHomeBinding
 import com.example.mvvm_clean_example_01.domain.RecipeUsecase
 import com.example.mvvm_clean_example_01.presentation.viewmodel.MainViewModel
 import com.example.mvvm_clean_example_01.presentation.viewmodel.ViewModelFactory
@@ -29,8 +30,10 @@ import com.google.gson.Gson
  */
 class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by  viewModels { ViewModelFactory() }
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
-   // private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -40,11 +43,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val  view = inflater.inflate(R.layout.fragment_home, container, false)
-
+       // val  view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
         viewModel.getFoodRecipe(applyQueries())
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.food_recipe_recycler_view)
+        val recyclerView = binding.foodRecipeRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         var adapter = RecipeAdapter {foodRecipe: FoodRecipe ->
