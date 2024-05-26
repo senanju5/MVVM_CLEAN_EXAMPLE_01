@@ -10,6 +10,7 @@ import android.widget.TextView
 import coil.load
 import com.example.mvvm_clean_example_01.R
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
+import com.example.mvvm_clean_example_01.databinding.FragmentDetailBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -21,6 +22,8 @@ import com.google.gson.reflect.TypeToken
  */
 class DetailFragment : Fragment() {
 
+    private  lateinit var _binding: FragmentDetailBinding
+    private val binding get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,18 +36,18 @@ class DetailFragment : Fragment() {
         val recipeJson = arguments?.getString("recipe")
         val recipeType = object : TypeToken<FoodRecipe>() {}.type
         val recipe: FoodRecipe = Gson().fromJson(recipeJson ,recipeType)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        val view = inflater.inflate(R.layout.fragment_detail, container, false)
-
-        setData(view,recipe)
+        setData(recipe)
         return view
     }
 
-    private fun setData(view: View,recipe: FoodRecipe) {
-        view.findViewById<TextView>(R.id.title).text = recipe.title
-        view.findViewById<TextView>(R.id.price).text = recipe.pricePerServing.toString()
-        view.findViewById<TextView>(R.id.summary).text = recipe.summary
-        view.findViewById<ImageView>(R.id.foodImage).load(recipe.image)
+    private fun setData(recipe: FoodRecipe) {
+        binding.title.text = recipe.title
+        binding.price.text = recipe.pricePerServing.toString()
+        binding.summary.text = recipe.summary
+        binding.foodImage.load(recipe.image)
     }
 
 }
