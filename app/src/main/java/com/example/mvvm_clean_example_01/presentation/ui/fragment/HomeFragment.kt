@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,7 @@ import com.google.gson.Gson
  * create an instance of this fragment.
  */
 class HomeFragment : Fragment() {
-    private val viewModel: MainViewModel by  viewModels { ViewModelFactory() }
+    private val viewModel: MainViewModel by activityViewModels<MainViewModel>()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
