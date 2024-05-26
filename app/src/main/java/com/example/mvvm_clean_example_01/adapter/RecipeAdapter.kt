@@ -13,7 +13,7 @@ import com.example.mvvm_clean_example_01.R
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.databinding.FoodItemViewBinding
 
-class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<FoodRecipe,RecipeAdapter.RecipeViewHolder>(DIFF_CALLBACK) {
+class RecipeAdapter(private val clickListener:(position:Int)->Unit):ListAdapter<FoodRecipe,RecipeAdapter.RecipeViewHolder>(DIFF_CALLBACK) {
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FoodRecipe>() {
             override fun areItemsTheSame(oldItem: FoodRecipe, newItem: FoodRecipe): Boolean {
@@ -23,8 +23,8 @@ class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<Fo
                 return oldItem == newItem
             }
         }        }
-    class RecipeViewHolder(private val binding: FoodItemViewBinding, private val clickListener:(FoodRecipe)->Unit) :RecyclerView.ViewHolder(binding.root) {
-        fun onBindView(foodRecipe: FoodRecipe) {
+    class RecipeViewHolder(private val binding: FoodItemViewBinding, private val clickListener:(position:Int)->Unit) :RecyclerView.ViewHolder(binding.root) {
+        fun onBindView(foodRecipe: FoodRecipe, position: Int) {
             binding.titleText.text = (foodRecipe.title)
             binding.priceText.text = ("Price: "+foodRecipe.pricePerServing.toString())
 
@@ -33,7 +33,7 @@ class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<Fo
                 crossfade(600)
             }
             itemView.setOnClickListener {
-                clickListener(foodRecipe)
+                clickListener(position)
             }
         }
     }
@@ -47,6 +47,6 @@ class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<Fo
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        holder.onBindView(getItem(position))
+        holder.onBindView(getItem(position), position)
     }
 }

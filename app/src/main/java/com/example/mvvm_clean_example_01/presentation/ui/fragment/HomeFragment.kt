@@ -50,9 +50,10 @@ class HomeFragment : Fragment() {
         val recyclerView = binding.foodRecipeRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        var adapter = RecipeAdapter {foodRecipe: FoodRecipe ->
-            val recipe = Gson().toJson(foodRecipe)
-            val bundle = bundleOf("recipe" to recipe)
+        var adapter = RecipeAdapter {position: Int ->
+            val bundle = Bundle()
+            bundle.putInt("position", position)
+
           findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
         }
         recyclerView.adapter =adapter
