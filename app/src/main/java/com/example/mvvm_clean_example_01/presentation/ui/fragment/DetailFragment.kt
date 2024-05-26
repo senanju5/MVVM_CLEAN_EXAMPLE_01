@@ -22,8 +22,8 @@ import com.google.gson.reflect.TypeToken
  */
 class DetailFragment : Fragment() {
 
-    private  lateinit var _binding: FragmentDetailBinding
-    private val binding get() = _binding
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -48,6 +48,11 @@ class DetailFragment : Fragment() {
         binding.price.text = recipe.pricePerServing.toString()
         binding.summary.text = recipe.summary
         binding.foodImage.load(recipe.image)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
