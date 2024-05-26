@@ -1,4 +1,4 @@
-package com.example.mvvm_clean_example_01.ui
+package com.example.mvvm_clean_example_01.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

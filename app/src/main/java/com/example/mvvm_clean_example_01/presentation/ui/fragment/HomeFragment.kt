@@ -1,7 +1,6 @@
-package com.example.mvvm_clean_example_01.ui.fragment
+package com.example.mvvm_clean_example_01.presentation.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.data.remotedata.RemoteDataSource
 import com.example.mvvm_clean_example_01.data.repository.FoodRecipeRepository
 import com.example.mvvm_clean_example_01.domain.RecipeUsecase
-import com.example.mvvm_clean_example_01.ui.viewmodel.MainViewModel
+import com.example.mvvm_clean_example_01.presentation.viewmodel.MainViewModel
 import com.example.mvvm_clean_example_01.utils.Constants.Companion.API_KEY
 import com.google.gson.Gson
 

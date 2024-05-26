@@ -6,12 +6,12 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.mvvm_clean_example_01.ui.fragment.DetailFragment"
+        android:name="com.example.mvvm_clean_example_01.presentation.ui.fragment.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.mvvm_clean_example_01.ui.fragment.HomeFragment"
+        android:name="com.example.mvvm_clean_example_01.presentation.ui.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action

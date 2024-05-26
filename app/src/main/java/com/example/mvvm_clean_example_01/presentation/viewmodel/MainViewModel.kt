@@ -1,11 +1,10 @@
-package com.example.mvvm_clean_example_01.ui.viewmodel
+package com.example.mvvm_clean_example_01.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.domain.RecipeUsecase
-import com.example.mvvm_clean_example_01.data.network.model.RemoteFoodRecipe
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val recipeUsecase: RecipeUsecase):ViewModel() {
