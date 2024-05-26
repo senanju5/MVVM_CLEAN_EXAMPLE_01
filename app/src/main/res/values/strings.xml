@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MVVM_CLEAN_EXAMPLE_01</string>
+    <string name="app_name">Eats</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="home_fragment">HomeFragment</string>
     <string name="detail_fragment">DetailFragment</string>">

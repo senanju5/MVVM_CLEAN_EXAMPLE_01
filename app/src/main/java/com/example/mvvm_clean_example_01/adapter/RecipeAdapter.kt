@@ -31,8 +31,8 @@ class RecipeAdapter(private val clickListener:(FoodRecipe)->Unit):ListAdapter<Fo
 
 
         fun onBindView(foodRecipe: FoodRecipe) {
-           titleTextView.text = foodRecipe.title
-            priceTextView.text = foodRecipe.pricePerServing.toString()
+           titleTextView.text = (foodRecipe.title)
+            priceTextView.text = ("Price: "+foodRecipe.pricePerServing.toString())
             recipeImageView.load(foodRecipe.image){
                 crossfade(true)
                 crossfade(600)
