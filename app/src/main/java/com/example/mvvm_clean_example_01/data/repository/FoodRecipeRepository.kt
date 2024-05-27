@@ -2,7 +2,6 @@ package com.example.mvvm_clean_example_01.data.repository
 
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.data.remotedata.RemoteDataSource
-import com.example.mvvm_clean_example_01.data.network.model.RemoteFoodRecipe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

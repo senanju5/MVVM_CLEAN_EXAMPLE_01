@@ -1,15 +1,11 @@
 package com.example.mvvm_clean_example_01.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.mvvm_clean_example_01.R
 import com.example.mvvm_clean_example_01.data.model.FoodRecipe
 import com.example.mvvm_clean_example_01.databinding.FoodItemViewBinding
 
